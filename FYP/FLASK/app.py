@@ -43,7 +43,7 @@ X_test_vectors = vectorizer.transform(X_test)
 
 
 # Load your API key from an environment variable or secret management service
-openai.api_key = "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"
+openai.api_key = "<API_KEY>"
 
 
 class Product:
