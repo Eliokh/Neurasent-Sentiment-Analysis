@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neurasent</title>
+
+    <!-- Logo -->
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/logo.ico') }}"
+      type="image/x-icon"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <!-- Custom.css -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+
+    <!-- JQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.min.js"
+      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div
+      class="modal fade"
+      id="Modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="ModalLabel"
+      data-backdrop="static"
+      data-keyboard="false"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body" style="text-align: center">
+            <img
+              src="{{ url_for('static', filename='images/spinner2.gif') }}"
+              alt="Spinner"
+            />
+
+            <p id="loading_text">Loading...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cursor">
+      <div class="cursor__inner cursor-circle"></div>
+      <div class="cursor__inner cursor-dot"></div>
+    </div>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="container navbar-card">
+        <div class="navbar-header">
+          <!-- <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target=".navbar-collapse"
+          >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button> -->
+          <div class="navbar-brand neurasent-logo">
+            <img
+              width="25"
+              height="25"
+              src="{{ url_for('static', filename='images/logoAI.png') }}"
+            />
+            <a href="{{ url_for('index') }}" class="cool-title">Neurasent</a>
+          </div>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">AI</a></li>
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container body-content">
+      <div class="row">
+        <form
+          novalidate
+          id="search-form"
+          action="{{ url_for('search') }}"
+          method="GET"
+        >
+          <div class="row" style="justify-content: center">
+            <div class="col-6">
+              <input
+                type="text"
+                class="form-control search-box"
+                name="query"
+                placeholder="Search for a product"
+                autocomplete="off"
+                required="required"
+              />
+            </div>
+            <div class="col-1">
+              <input type="submit" class="btn btn-primary" value="Search" 
+              style="font-family: 'Orbitron', sans-serif; border-radius: 10px; box-shadow: 0 0 10px #00FFFF; background-color: #000000; color: #00FFFF;"/>
+            </div>
+          </div>
+        </form> 
+      </div>
+      <div class="row">
+        <div class="gpt-response bg-gray card">
+          <!-- <h5>Synthesis</h5> -->
+          <h5 >Analytical insight</h5>
+          <hr />
+          <p id="gpt_response"></p>
+        </div>
+      </div>
+      <div class="row">
+        <p style="font-family: 'Orbitron', sans-serif; color: #ffffff; text-shadow: 0 0 10px rgb(7, 
+        187,247)"><i>Results back in {{ exec_time }} seconds</i></p>
+        {% for item in reviews %}
+        <div class="col-4">
+          <div class="product-div bg-gray card">
+            <p>{{ item.price }}</p>
+            <img src="{{ item.imageSrc }}" />
+            <h6>{{ item.imageAlt }}</h6>
+            <hr />
+            <!-- <p>ASIN: {{ item[0] }}</p> -->
+            <!-- <p>tot : {{ item[3] }}</p> -->
+
+            <p>pos : {{ "{:.2f}".format(item.pos_percentage) }}%</p>
+            <p>neg : {{ "{:.2f}".format(item.neg_percentage) }}%</p>
+
+            <div class="progress" style="max-width: 100%">
+              <div
+                class="progress-bar bg-success progress-bar-striped"
+                style="width: {{ item.pos_percentage }}%"
+              >
+                Positive
+              </div>
+              <!-- VS CODE IS SHOWING AN ERROR HERE, BUT IT IS NOT AN ERROR JUST IGNORE IT -->
+              <div
+                class="progress-bar bg-danger progress-bar-striped"
+                style="width: {{ item.neg_percentage }}%"
+              >
+                Negative
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="row">
+        <div class="product-feedback bg-gray card">
+          <h3>Products Feedback</h3>
+          <hr />
+          {% for item in reviews %}
+          <h5>{{ item.imageAlt }}</h5>
+          <br />
+          {% for comment in item.productReviews %}
+          <div
+            data-asin="{{ item.asin }}"
+            class="row review review-{{ comment.sentiment }}"
+          >
+            <div class="col-1 sentiment-thumbs">
+              {% if comment.sentiment == "positive" %}
+              <i
+                class="fa fa-solid fa-thumbs-up fa-2x"
+                style="color: #71bcac"
+              ></i>
+              {% else %}
+              <i
+                class="fa fa-solid fa-thumbs-down fa-2x"
+                style="color: #be215e"
+              ></i>
+              {% endif %}
+            </div>
+            <div class="col-11 review-comment">
+              <p><strong>{{ comment.author }}</strong></p>
+              <p class="review-text">{{ comment.comment }}</p>
+              <p class="read-more-btn">Read More</p>
+            </div>
+          </div>
+          {% if item.productReviews|length == 0 %}
+          <p><i>No comments for this product</i></p>
+          {% endif %} {% endfor %}
+          <hr />
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="{{ url_for('static', filename='js/cursor.js') }}"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#Modal").modal({
+          backdrop: "static",
+          keyboard: false,
+        });
+        // generate the gpt response animation
+        generateText("{{ gptResponse }}");
+
+        $("#search-form").on("submit", function () {
+          //$("#myButton").click(function () {
+          $("#Modal").modal("show");
+        });
+
+        // change loading text every second
+        var loading_texts = [
+          "Scraping the web...",
+          "Grabbing Product Reviews...",
+          "AI Sentiment Analysis...",
+          "Evaluation outcome...",
+          "Loading Images...",
+          "Analyzing the Data...",
+          "AI Assessment finding...",
+        ]; // Array of texts to cycle through
+        var currentIndex = 0; // Index of the current text
+
+        function changeText() {
+          $("#loading_text").text(loading_texts[currentIndex]); // Update the text
+
+          // Increment the index or reset to 0 if it exceeds the array length
+          currentIndex = (currentIndex + 1) % loading_texts.length;
+        }
+
+        // Call the changeText function every second (1000 milliseconds)
+        setInterval(changeText, 2500);
+
+        function generateText(text) {
+          const words = text.split(" ");
+          let wordIndex = 0;
+
+          const response_box = document.getElementById("gpt_response");
+
+          const interval = setInterval(() => {
+            if (wordIndex < words.length) {
+              response_box.innerHTML += words[wordIndex] + " ";
+              wordIndex++;
+
+              const intervalTime = Math.floor(Math.random() * 2000) + 1000;
+
+              setTimeout(() => {
+                if (wordIndex < words.length) {
+                  response_box.innerHTML += words[wordIndex] + " ";
+                  wordIndex++;
+                }
+              }, intervalTime);
+            } else {
+              clearInterval(interval);
+            }
+          }, 100);
+        }
+
+        // function generateText(text) {
+        //   const phrasesToColor = getColoredText(); // Phrases to be colored
+        //   const words = text.split(" ");
+        //   let wordIndex = 0;
+
+        //   const response_box = document.getElementById("gpt_response");
+
+        //   const interval = setInterval(() => {
+        //     if (wordIndex < words.length) {
+        //       const currentWord = words[wordIndex];
+        //       let coloredWord = currentWord;
+        //       for (const phrase of phrasesToColor) {
+        //         if (currentWord.includes(phrase)) {
+        //           const coloredPhrase = `<span style="color: red;">${phrase}</span>`;
+        //           coloredWord = currentWord.replace(phrase, coloredPhrase);
+        //           break;
+        //         }
+        //       }
+
+        //       response_box.innerHTML += coloredWord + " ";
+        //       wordIndex++;
+
+        //       const intervalTime = Math.floor(Math.random() * 2000) + 1000;
+
+        //       setTimeout(() => {
+        //         if (wordIndex < words.length) {
+        //           response_box.innerHTML += words[wordIndex] + " ";
+        //           wordIndex++;
+        //         }
+        //       }, intervalTime);
+        //     } else {
+        //       clearInterval(interval);
+        //     }
+        //   }, 100);
+        // }
+
+        // function getColoredText(){
+        //   res = [];
+        //   {% for item in reviews %}
+        //     res.push('{{ item.imageAlt }}');
+        //   {% endfor %}
+        //   console.log(res);
+        //   return res;
+        // }
+
+        // Function to handle the "Read More" button click event
+        $(".read-more-btn").click(function () {
+          var textContainer = $(this).closest(".review-comment");
+          textContainer.find(".review-text").css("-webkit-line-clamp", "unset");
+          textContainer.animate();
+          $(this).hide();
+        });
+
+        // Check if the text content overflows and show the "Read More" button accordingly
+        function checkTextOverflow() {
+          $(".review-comment").each(function () {
+            var textContainer = $(this);
+            var textContent = textContainer.find(".review-text")[0];
+
+            if (textContent.offsetHeight < textContent.scrollHeight) {
+              textContainer.find(".read-more-btn").show();
+            } else {
+              textContainer.find(".read-more-btn").hide();
+            }
+          });
+        }
+
+        // Call the checkTextOverflow function on page load and window resize
+        $(window).on("load resize", function () {
+          checkTextOverflow();
+        });
+
+        // hide loading modal if we are coming back from another search
+        $(window).on("pageshow", function (event) {
+          // Check if the event persisted property is false, indicating the page is loaded from the cache
+          if (event.originalEvent.persisted) {
+            // Hide the modal when navigating back to the page
+            $("#Modal").modal("hide");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

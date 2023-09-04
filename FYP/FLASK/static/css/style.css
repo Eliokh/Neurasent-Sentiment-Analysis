@@ -1,0 +1,489 @@
+html {
+  scroll-behavior: smooth !important;
+}
+* {
+  cursor: none !important;
+}
+
+body {
+  background-color: #f6f6f6;
+  opacity: 1;
+  /* background-image: radial-gradient(#2d4afa 1px, #f6f6f6 1px); */
+  /* background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%); */
+  /* background-size: 20px 20px; */
+   background-image: url("../images/bluedark.jpg");
+  background-size: cover; 
+  font-family: "JetBrains Mono", monospace !important;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff !important;
+}
+
+/* BACKGROUND */
+/*body,
+html {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #F6F4F2;
+}*/
+
+.btn {
+  border-radius: 7px 0 !important;
+  border: 0 solid black !important;
+}
+
+.btn-primary {
+  background-color: #337a !important;
+}
+
+.back-to-top {
+  position: fixed;
+  right: -30px;
+  bottom: -50px;
+  z-index: 10001;
+  width: 200px;
+}
+
+.back-to-top-btn {
+  display: none;
+}
+
+.back-to-top p {
+  position: absolute;
+  right: 87px;
+  bottom: 90px;
+  color: white;
+}
+
+.css-arrow-up {
+  border-color: transparent transparent #fff;
+  border-style: solid;
+  border-width: 0 10px 20px;
+  float: left;
+  height: 0;
+  /*margin: 0 10px;*/
+  width: 0;
+}
+
+.email-us{
+  margin: 0;
+  margin-right: 10px;
+  color: white;
+}
+
+.email-us:hover{
+  color: #337ab7 !important;
+}
+
+.anime-wrapper {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.stagger-visualizer {
+  display: flex;
+  /*flex-wrap: wrap;*/
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  height: 450px;
+}
+
+.stagger-visualizer div {
+  /*position: absolute;*/
+  width: 64px;
+  height: 128px;
+  border: 1px solid #373535;
+  background-color: #f6f4f2;
+}
+/* end BACKGROUND */
+
+.neurasent-logo {
+  display: flex;
+  align-items: center;
+    /* transform: skewX(-10deg); */
+   perspective: 1000px; 
+}
+
+a:hover {
+  color: #337ab7 !important;
+}
+
+.neurasent-logo a {
+  text-decoration: none !important;
+}
+
+.neurasent-logo img {
+  margin-right: 5px;
+}
+
+.navbar {
+  position: static;
+  width: 100%;
+  /* background-color: #f0f0f0; */
+  padding: 10px;
+  transition: top 0.2s ease;
+  
+}
+
+.navbar-card {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.24);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.8px);
+  -webkit-backdrop-filter: blur(2.8px);
+  margin-top: 10px;
+  padding: 5px 15px 5px 15px !important;
+  
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background: rgba(219, 235, 244, 0.54) !important;
+}
+
+/* .footer-card {
+  background: rgba(255, 255, 255, 0.24);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.8px);
+  -webkit-backdrop-filter: blur(2.8px);
+  padding: 20px;
+  padding-bottom: 10px;
+} */
+
+
+
+
+
+
+/* CURSOR */
+.cursor {
+  /*position:relative;*/
+}
+
+.cursor__inner {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 70%;
+  mix-blend-mode: difference;
+  will-change: opacity;
+  backface-visibility: hidden;
+  z-index: 100001;
+}
+
+body .cursor-dot {
+  width: 20px;
+  height: 20px;
+  /*background-color: #fff;*/
+  /*background-color: #d32;*/
+  background-color: #e0634d;
+  backface-visibility: hidden;
+}
+
+body .cursor-circle {
+  width: 35px;
+  height: 35px;
+  /*border: 2px solid #fff;*/
+  border: 2px solid #e0634d;
+  backface-visibility: hidden;
+}
+
+body.animated .cursor-dot {
+  /*background: #fff;*/
+  background: #e0634d;
+}
+
+body.animated .cursor-circle {
+  /*border: 2px solid #fff;*/
+  border: 2px solid #e0634d;
+}
+/* END CURSOR */
+
+/* CURSOR KARIM */
+body .cursor-circle {
+  transition: border-radius 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/*.cursor-opacity{
+    opacity: 0.2 !important;
+}*/
+.cursor-circle-checked {
+  border: 3px solid blue !important;
+}
+/* END CURSOR KARIM */
+
+.bg-gray {
+  /* background-color: #f8f8f8 !important; */
+  background-color: #fff !important;
+  transition: 0.5s;
+}
+
+.bg-gray:hover {
+  background-color: white !important;
+}
+
+.main-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.search-box {
+  width: 400px;
+}
+
+.progress-bar.bg-success {
+  background-color: #71bcac !important;
+}
+
+.progress-bar.bg-danger {
+  background-color: #be215e !important;
+}
+
+.product-div img {
+  height: 200px !important;
+  object-fit: contain !important;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.product-div {
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+  padding: 20px;
+}
+
+.gpt-response {
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+  padding: 20px;
+}
+
+.side-pane {
+  background-color: ghostwhite;
+  /*height: 500px;*/
+  padding: 10px;
+  padding-bottom: 90px;
+  margin-bottom: 30px;
+}
+
+.card {
+  box-shadow: 0 0.1429rem 0.6429rem 0.07143rem rgba(0, 0, 0, 0.1);
+  border: 0 !important;
+}
+
+input[type="checkbox"] {
+  /*-webkit-appearance: ;*/
+  width: 20px;
+  height: 20px;
+  /*border-radius: 50%;*/
+  /*border: 2px solid #dbebf4;*/
+  border: 0 solid #fff !important;
+  background-color: #fff;
+  /*transition: background-color 0.3s ease-in-out;*/
+}
+
+input[type="checkbox"]:checked {
+  /*background-color: #dbebf4;*/
+  box-shadow: 0 0 10px #dbebf4;
+}
+
+/* .review-positive {
+  color: #71bcac;
+}
+
+.review-negative {
+  color: #be215e;
+} */
+
+.sentiment-thumbs {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.review {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  /* margin-bottom: 10px; */
+  margin: 5px !important;
+  padding: 20px 10px 20px 10px;
+}
+
+.product-feedback {
+  padding: 30px;
+}
+
+.review-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Show only 3 lines */
+  -webkit-box-orient: vertical;
+}
+
+.read-more-btn {
+  display: none;
+  color: #337ab7;
+}
+
+.read-more-btn:hover {
+  text-decoration: underline;
+}
+
+/* .main-titles {
+  margin-bottom: 40px;
+} */
+
+/* .main-titles h2 {
+  background: linear-gradient(to right, #9c003c, #ffffff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+} */
+
+/* 
+@keyframes borderAnimation {
+  from {
+    background-position: 0 0, -18px 0, 100% -18px, 0 100%;
+  }
+
+  to {
+    background-position: 0 -18px, 0 0, 100% 0, -18px 100%;
+  }
+} */
+
+
+
+ 
+.btn:hover { transform: scale(1.1); background-color: #00FFFF; color: #000000; }
+
+.navbar-toggle.futuristic-button{color:#337ab7}
+
+.navbar-toggle.futuristic-button:hover {  transform: scale(1.1); background-color: #00FFFF; color: #000000; }
+
+/* Add some custom CSS styles */
+.skew {
+  /* Remove the background image */
+  /* background-image: linear-gradient(
+    to right,
+    rgba(7, 187, 247, 0.5),
+    rgba(0, 0, 0, 0.5)
+  ); */
+
+  /* Add a white border */
+  border: 2px solid white;
+
+  /* Add a skew transform */
+  transform: skewX(-10deg);
+
+  perspective: 1000px;
+
+
+  padding: 20px; /* Add some space around the content */
+  border-radius: 10px; /* Round the corners of the container */
+  box-shadow: inset 0 0 10px rgba(4, 150, 255, 0.2); /* Add some inner shadow effect */
+}
+
+.cool-title {
+  color: white; /* White text color */
+  font-family: "Orbitron", sans-serif; /* Futuristic and sans-serif font */
+  text-align: center; /* Center the text */
+  text-transform: uppercase; /* Make the text all caps */
+  letter-spacing: 1px; /* Add some space between the letters */
+  text-shadow: 0 0 10px rgb(7, 
+187, 
+247); /* Add some glowing effect */ font-size :36 px;/* Increase the font size */ } .subtitle { color :white;/* White text color */ font-family :"Orbitron" ,sans-serif;/* Futuristic and sans-serif font */ text-align :center;/* Center the text */ font-style :italic;/* Make the text italic */ margin-top :0;/* Remove the space above the subtitle */ text-shadow :0
+0
+10
+p x rgb (7 ,187 ,247);/* Add some glowing effect */ font-size :24 px;/* Increase the font size */ } .search-box { border-radius :5 px;/* Round the corners of the input box */ border-color :white;/* White border color */ outline :none;/* Remove the default outline */ box-shadow :inset
+0
+0
+10
+p x rgba (255 ,255 ,255 ,0.2);/* Add some inner shadow effect */ color :white;/* White text color */ background-color :transparent;/* Transparent background color */ font-family :"Orbitron" ,sans-serif;/* Futuristic and sans-serif font */ padding-left :10 px;/* Add some space inside the input box */ transition :all ease-in-out
+0.3
+s;/* Add some smooth transition for hover and focus effects */ font-size :18 px;/* Increase the font size */ width :300 px;/* Increase the width of the input box */ } .search-box:hover { box-shadow :inset -1 -1 px rgb (7 ,187 ,247),inset -2 -2 px rgb (7 ,187 ,247),inset -3 -3 px rgb (7 ,187 ,247),inset -4 -4 px rgb (7 ,187 ,247),inset -5 -5 px rgb (7 ,187 ,247),inset -6 -6 px rgb (7 ,187 ,247),inset -7 -7 px rgb (7 ,187 ,247),inset -8 -8 px rgb (7 ,187 ,247),inset -9 -9 px rgb (7 ,187 ,247),inset -10
+-10
+px
+rgb
+(7
+,187
+,247
+);/* Add some glowing effect on hover */ transform :translateX(-5 px);/* Move the input box slightly to the left on hover */ cursor :pointer;/* Change the cursor to a pointer on hover */ } .search-box:focus { box-shadow :inset -1 -1 px rgb (7 ,187 ,247),inset -2 -2 px rgb (7 ,187 ,247),inset -3 -3 px rgb (7 ,187 ,247),inset -4 -4 px rgb (7 ,187 ,247),inset -5 -5 px rgb (7 ,187 ,247),inset -6 -6 px rgb (7 ,187 ,247),inset -7 -7 px rgb (7 ,187 ,247),inset -8 -8 px rgb (7 ,187 ,247),inset -9
+-9
+px
+rgb
+(7
+,187
+,247
+),
+inset
+-10
+-10
+px
+rgb
+(7
+, 187, 247); /* Add some glowing effect on focus */
+transform: translateX(-5px); /* Move the input box slightly to the left on focus */
+cursor: pointer; /* Change the cursor to a pointer on focus */
+}
+
+.btn-primary {
+  border-radius: 5px; /* Round the corners of the button */
+  border-color: white; /* White border color */
+  outline: none; /* Remove the default outline */
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2); /* Add some inner shadow effect */
+  color: white; /* White text color */
+  background-color: transparent; /* Transparent background color */
+  font-family: "Orbitron", sans-serif; /* Futuristic and sans-serif font */
+  transition: all ease-in-out 0.3s; /* Add some smooth transition for hover and focus effects */
+  font-size: 18px; /* Increase the font size */
+}
+
+.btn-primary:hover {
+box-shadow :inset -1 -1 px rgb (7 ,187 ,247),inset -2 -2 px rgb (7 ,187 ,247),inset -3 -3 px rgb (7 ,187 ,247),inset -4 -4 px rgb (7 ,187 ,247),inset -5 -5 px rgb (7 ,187 ,247),inset -6 -6 px rgb (7 ,187 ,247),inset -7 -7 px rgb (7 ,187 ,247),inset -8 -8 px rgb (7 ,187 ,247),inset -9 -9 px rgb (7 ,187 ,247),inset -10
+-10
+px
+rgb
+(7
+,187
+,247
+);/* Add some glowing effect on hover */ transform :translateX(-5 px);/* Move the button slightly to the left on hover */ cursor :pointer;/* Change the cursor to a pointer on hover */ } .btn-primary:focus { box-shadow :inset -1 -1 px rgb (7 ,187 ,247),inset -2 -2 px rgb (7 ,187 ,247),inset -3 -3 px rgb (7 ,187 ,247),inset -4 -4 px rgb (7 ,187 ,247),inset -5 -5 px rgb (7 ,187 ,247),inset 
+-6
+-6
+px
+rgb
+(7
+, 187, 247); /* Add some glowing effect on focus */
+transform: translateX(-5px); /* Move the button slightly to the left on focus */
+cursor: pointer; /* Change the cursor to a pointer on focus */
+}
+
+.video-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
